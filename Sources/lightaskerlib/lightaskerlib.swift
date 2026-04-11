@@ -39,7 +39,7 @@ public struct Task {
     public mutating func markComplete() {
         self.isCompleted = true
     }
-    public mutating func markIncompltete() {
+    public mutating func markIncomplete() {
         self.isCompleted = false
     }
 }

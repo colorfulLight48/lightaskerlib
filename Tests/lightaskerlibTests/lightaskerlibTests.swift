@@ -8,7 +8,6 @@ import Foundation
     taskList.addTask(task: Task(id: "makeTestOne", name: "Make First Unit Test", isCompleted: true))
     
     guard var _ = taskList.lookup(id: "makeTestOne") else {
-        print("This task doesn't exist.")
         #expect(Bool(false))
         return
     }
@@ -17,17 +16,30 @@ import Foundation
 }
 
 @Test func complete() {
-    var violations = 0
+    
     var myTask: Task = Task(id: "makeTestTwo", name: "Make Second Unit Test", isCompleted: false)
-    if myTask.isCompleted == false {} else {
-        print("Violation: isCompleted was set to false in init.")
-        violations += 1
-    }
+    
     myTask.markComplete()
-    if myTask.isCompleted == true {} else {
-        print("Violation: myTask was marked completed but not really.")
-        violations += 1
-    }
-    print("Violations: \(violations)")
-    #expect(violations == 0)
+    
+    #expect(myTask.isCompleted == true)
 }
+
+@Test func delete() {
+    var taskList: Array<Task> = []
+    taskList.addTask(task: Task(id: "makeKernelPanic", name: "Make Kernel Panic", isCompleted: false))
+    taskList.deleteTask(id: "makeKernelPanic")
+    guard var _ = taskList.lookup(id: "makeKernelPanic") else {
+        #expect(Bool(true))
+        return
+    }
+    #expect(Bool(false))
+}
+
+@Test func makeIncomplete() {
+    var myTask: Task = Task(id: "incompleteTask", name: "This shouldn't be completed", isCompleted: true)
+    
+    myTask.markIncomplete()
+    
+    #expect(myTask.isCompleted == false)
+}
+
