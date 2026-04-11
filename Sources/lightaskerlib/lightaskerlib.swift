@@ -9,35 +9,27 @@ public extension Array<Task> {
         }
         return nil
     }
-    func lookupById(id: String) -> Task? {
+    func lookup(id: String) -> Task? {
         guard let value = self.getIndexById(id: id) else {
             return nil
         }
         return self[value]
     }
-}
-
-public struct TaskListManager {
-    var tasks: [Task]
-    
-    
-    public mutating func addTask(task: Task) {
-        self.tasks.append(task)
+    mutating func addTask(task: Task) {
+        self.append(task)
     }
-    public mutating func deleteTask(id: String) {
+    mutating func deleteTask(id: String) {
         
-        guard let indexToRemove = self.tasks.getIndexById(id: id) else {
+        guard let indexToRemove = self.getIndexById(id: id) else {
             return
         }
-        if self.tasks.indices.contains(indexToRemove) {
-            self.tasks.remove(at: indexToRemove)
+        if self.indices.contains(indexToRemove) {
+            self.remove(at: indexToRemove)
         }
     }
-    public mutating func getTask(id: String) -> Task? {
-        return self.tasks.lookupById(id: id)
-    }
-
 }
+
+
 
 public struct Task {
     var id: String
