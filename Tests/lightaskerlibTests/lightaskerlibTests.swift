@@ -5,7 +5,7 @@ import Foundation
 @Test func lookup() {
     var taskList: Array<Task> = []
 
-    taskList.addTask(task: Task(id: "makeTestOne", name: "Make First Unit Test", isCompleted: true))
+    taskList.addTask(task: Task(id: "makeTestOne"))
     
     guard var _ = taskList.lookup(id: "makeTestOne") else {
         #expect(Bool(false))
@@ -17,7 +17,7 @@ import Foundation
 
 @Test func complete() {
     
-    var myTask: Task = Task(id: "makeTestTwo", name: "Make Second Unit Test", isCompleted: false)
+    var myTask: Task = Task()
     
     myTask.markComplete()
     
@@ -26,7 +26,7 @@ import Foundation
 
 @Test func delete() {
     var taskList: Array<Task> = []
-    taskList.addTask(task: Task(id: "makeKernelPanic", name: "Make Kernel Panic", isCompleted: false))
+    taskList.addTask(task: Task(id: "makeKernelPanic"))
     taskList.deleteTask(id: "makeKernelPanic")
     guard var _ = taskList.lookup(id: "makeKernelPanic") else {
         #expect(Bool(true))
@@ -36,7 +36,7 @@ import Foundation
 }
 
 @Test func makeIncomplete() {
-    var myTask: Task = Task(id: "incompleteTask", name: "This shouldn't be completed", isCompleted: true)
+    var myTask: Task = Task(isCompleted: true)
     
     myTask.markIncomplete()
     

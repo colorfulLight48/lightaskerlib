@@ -1,3 +1,4 @@
+import Foundation
 
 
 public extension Array<Task> {
@@ -16,8 +17,18 @@ public extension Array<Task> {
         return self[value]
     }
     mutating func addTask(task: Task) {
+        if let id = task.id {
+            // If it HAS an ID, make sure that ID isn't already there
+            guard !self.contains(where: { $0.id == id }) else { return }
+        } else {
+            // If it HAS NO ID, make sure we don't already have a "no-id" task
+            guard !self.contains(where: { $0.id == nil }) else { return }
+        }
+        
         self.append(task)
     }
+
+
     mutating func deleteTask(id: String) {
         
         guard let indexToRemove = self.getIndexById(id: id) else {
@@ -32,9 +43,17 @@ public extension Array<Task> {
 
 
 public struct Task {
-    var id: String
-    var name: String
-    var isCompleted: Bool
+    var id: String?
+    var name: String?    
+    var isCompleted: Bool = false
+    var dueDate: Date?
+    var isOverdue: Bool {
+        // 1. If there's no due date, it can't be overdue
+        guard let dueDate = dueDate else { return false }
+        
+        // 2. Compare the due date with the current moment
+        return dueDate < Date()
+    }
 
     public mutating func markComplete() {
         self.isCompleted = true
