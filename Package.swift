@@ -8,19 +8,19 @@ let package = Package(
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
-            name: "Lightasker-Data",
-            targets: ["Lightasker-Data"]
+            name: "lightaskerlib",
+            targets: ["lightaskerlib"]
         ),
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "Lightasker-Data"
+            name: "lightaskerlib"
         ),
         .testTarget(
-            name: "Lightasker-DataTests",
-            dependencies: ["Lightasker-Data"]
+            name: "lightaskerlibTests",
+            dependencies: ["lightaskerlib"]
         ),
     ],
     swiftLanguageModes: [.v6]
