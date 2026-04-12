@@ -43,3 +43,17 @@ import Foundation
     #expect(myTask.isCompleted == false)
 }
 
+@Test func makeNonOverdueTask() {
+    let calendar = Calendar.current
+    let tomorrow = calendar.date(byAdding: .day, value: 1, to: .now)
+    let myTask: Task = Task(dueDate: tomorrow)
+    #expect(myTask.isOverdue == false)
+}
+
+@Test func makeOverdueTask() {
+    let yesterday = Calendar.current.date(byAdding: .day, value: -1, to: Date())
+    // Now use it in your test
+    let overdueTask = Task(dueDate: yesterday)
+    #expect(overdueTask.isOverdue == true)
+
+}
