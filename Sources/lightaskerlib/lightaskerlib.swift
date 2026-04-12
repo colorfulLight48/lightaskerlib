@@ -1,5 +1,4 @@
 public struct Task {
-    public var id: String?
     public var name: String?    
     public var isCompleted: Bool = false
    
