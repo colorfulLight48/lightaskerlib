@@ -1,8 +1,26 @@
 import Foundation
-
+public protocol LightaskerLibraryProtocol {
+    associatedtype Task: LightaskerLibrary.TaskProtocol
+}
 public enum LightaskerLibrary {
+    public protocol TaskProtocol: Codable {
+        var id: String?
+        var name: String? 
+        var isCompleted: Bool
+        var dueDate: Date?
+        var startDate: Date?
+        var isOverDue: Bool
+        var startSecond: Date?
+        var startMinute: Date?
+        var startHour: Date?
+        var startSecond: Date?
+        var isInPeriod: Bool
+        mutating func markComplete()
+        mutating func markIncomplete()
+        init(id: String? = nil, name: String? = nil, dueDate: Date? = nil, startDate: Date? = nil)
+    }
     // Nested Task struct
-    public struct Task: Codable {
+    public struct Task: LightaskerLibrary.TaskProtocol {
         public var id: String?
         public var name: String?    
         public var isCompleted: Bool = false
