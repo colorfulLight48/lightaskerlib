@@ -5,7 +5,7 @@ import Foundation
 @Test func lookup() {
     var taskList: Array<LightaskerLibrary.Task> = []
 
-    taskList.addTask(task: Task(id: "makeTestOne"))
+    taskList.addTask(task: LightaskerLibrary.Task(id: "makeTestOne"))
     
     guard var _ = taskList.lookup(id: "makeTestOne") else {
         #expect(Bool(false))
@@ -26,7 +26,7 @@ import Foundation
 
 @Test func delete() {
     var taskList: Array<LightaskerLibrary.Task> = []
-    taskList.addTask(task: Task(id: "makeKernelPanic"))
+    taskList.addTask(task: LightaskerLibrary.Task(id: "makeKernelPanic"))
     taskList.deleteTask(id: "makeKernelPanic")
     guard var _ = taskList.lookup(id: "makeKernelPanic") else {
         #expect(Bool(true))

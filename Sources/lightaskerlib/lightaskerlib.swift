@@ -17,13 +17,13 @@ public enum LightaskerLibrary {
         var isInPeriod: Bool {get}
         mutating func markComplete()
         mutating func markIncomplete()
-        init(id: String?, name: String?, dueDate: Date?, startDate: Date?)
+        init(id: String?, name: String?, dueDate: Date?, startDate: Date?, isCompleted: Bool)
     }
     // Nested Task struct
     public struct Task: LightaskerLibrary.TaskProtocol {
         public var id: String?
         public var name: String?    
-        public var isCompleted: Bool = false
+        public var isCompleted: Bool
         public var dueDate: Date?
         public var startDate: Date?
         
@@ -56,11 +56,12 @@ public enum LightaskerLibrary {
         public mutating func markComplete() { self.isCompleted = true }
         public mutating func markIncomplete() { self.isCompleted = false }
         
-        public init(id: String? = nil, name: String? = nil, dueDate: Date? = nil, startDate: Date? = nil) {
+        public init(id: String? = nil, name: String? = nil, dueDate: Date? = nil, startDate: Date? = nil, isCompleted: Bool = false) {
             self.id = id
             self.name = name
             self.dueDate = dueDate
             self.startDate = startDate
+            self.isCompleted = isCompleted
         }
     }
 }
