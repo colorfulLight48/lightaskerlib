@@ -3,7 +3,7 @@ import Testing
 import Foundation
 
 @Test func lookup() {
-    var taskList: Array<Task> = []
+    var taskList: Array<LightaskerLibrary.Task> = []
 
     taskList.addTask(task: Task(id: "makeTestOne"))
     
@@ -17,7 +17,7 @@ import Foundation
 
 @Test func complete() {
     
-    var myTask: Task = Task()
+    var myTask: LightaskerLibrary.Task = LightaskerLibrary.Task()
     
     myTask.markComplete()
     
@@ -25,7 +25,7 @@ import Foundation
 }
 
 @Test func delete() {
-    var taskList: Array<Task> = []
+    var taskList: Array<LightaskerLibrary.Task> = []
     taskList.addTask(task: Task(id: "makeKernelPanic"))
     taskList.deleteTask(id: "makeKernelPanic")
     guard var _ = taskList.lookup(id: "makeKernelPanic") else {
@@ -36,7 +36,7 @@ import Foundation
 }
 
 @Test func makeIncomplete() {
-    var myTask: Task = Task(isCompleted: true)
+    var myTask: LightaskerLibrary.Task = LightaskerLibrary.Task(isCompleted: true)
     
     myTask.markIncomplete()
     
@@ -46,14 +46,14 @@ import Foundation
 @Test func makeNonOverdueTask() {
     let calendar = Calendar.current
     let tomorrow = calendar.date(byAdding: .day, value: 1, to: .now)
-    let myTask: Task = Task(dueDate: tomorrow)
+    let myTask: LightaskerLibrary.Task = LightaskerLibrary.Task(dueDate: tomorrow)
     #expect(myTask.isOverdue == false)
 }
 
 @Test func makeOverdueTask() {
     let yesterday = Calendar.current.date(byAdding: .day, value: -1, to: Date())
     // Now use it in your test
-    let overdueTask = Task(dueDate: yesterday)
+    let overdueTask = LightaskerLibrary.Task(dueDate: yesterday)
     #expect(overdueTask.isOverdue == true)
 
 }
