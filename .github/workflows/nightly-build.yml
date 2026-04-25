@@ -1,0 +1,24 @@
+name: Nightly Static Build
+
+on:
+  schedule:
+    - cron: "0 3 * * *"   # Every night at 3 AM UTC
+
+jobs:
+  build-macos:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build static library (macOS)
+        run: swift build -c release --static-swift-stdlib
+
+  build-linux:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Swift
+        uses: swift-actions/setup-swift@v2
+        with:
+          swift-version: "6.0"
+      - name: Build static library (Linux)
+        run: swift build -c release --static-swift-stdlib
