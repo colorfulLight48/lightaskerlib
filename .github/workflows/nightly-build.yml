@@ -26,15 +26,19 @@ jobs:
         run: swift build -c release --static-swift-stdlib
 
       - name: Prepare Artifact Name
-        # Adds the OS name to the file so they don't collide in the Release
         run: |
-          cp .build/release/liblightaskerlib.a liblightaskerlib-${{ runner.os }}.a
+          # Dynamically get the build folder
+          BIN_PATH=$(swift build -c release --show-bin-path)
+          echo "Looking for library in $BIN_PATH"
+          
+          # Copy the library to the root with a unique name
+          cp "$BIN_PATH/liblightaskerlib.a" "liblightaskerlib-${{ runner.os }}.a"
 
       - name: Release Assets
         uses: softprops/action-gh-release@v2
         with:
           tag_name: v${{ github.run_number }}
-          name: Release v${{ github.run_number }}
           files: liblightaskerlib-${{ runner.os }}.a
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
